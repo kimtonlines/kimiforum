@@ -1,0 +1,33 @@
+{
+  "name": "tchat",
+  "version": "1.0.0",
+  "description": "IPTEK-Forum",
+  "main": "index.js",
+  "dependencies": {
+    "@types/express-session": "^1.15.6",
+    "@types/ws": "^4.0.0",
+    "bufferutil": "3.0.3",
+    "duplexer": "^0.1.1",
+    "ejs": "^2.5.7",
+    "express": "4.16.2",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "jshint": "^2.9.5",
+    "mustache": "^2.3.0",
+    "nodemon": "^1.14.8",
+    "socket.io": "2.0.4",
+    "utf-8-validate": "4.0.0",
+    "ws": "4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {}
+}

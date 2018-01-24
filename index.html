@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <title>Kimi Forum</title>
+  </head>
+  <body>
+    <style>
+      
+      html, body {
+    padding: 10px;
+    margin: 20px;
+
+}
+
+/* Chat containers */
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* Darker chat container */
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style images */
+.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+/* Style the right image */
+.container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+/* Style time text */
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+    float: left;
+    color: #999;
+}
+
+/* Style the tab */
+.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 30%;
+    height: 300px;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+}
+
+.vertical-menu {
+    width: 200px; /* Set a width if you like */
+}
+
+.vertical-menu a {
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+      </style>
+    <h1>IPTEK Chatroom</h1>
+    <div id="bienvenue"></div>
+    <div class="" role="alert" id="noLogger">
+    </div><br><br>
+    <div id="newu">
+      </div> 
+      <div id="newUser">
+        </div><br><br>
+    <div class="vertical-menu">
+      <a href="#" class="active">Connecté(e)s</a>
+      <a href="#"><div id="moi"></div> </a>
+    </div>
+    <br><br>
+    <div id="sms">
+      <div class="message" id="smst" style="display:none">
+        <div class="info col-sm-6">
+        <div class="container">
+        <img src="{{{user.avatar}}}" alt="Avatar">
+        <p>{{user.username}}<br>{{message}}<br><span class="time-right">{{h}}:{{m}}</span></p>
+      </div>
+        </div>
+        </div>
+    </div>
+    <br>
+    <div id="formulaire">
+      <form action="" id="tchatForm">
+          <div class="col-sm-4">
+        <div class="form-group">
+         <div class="form-group">
+              <label for="username">Pseudo</label>
+              <input type="text" class="form-control" name="username" id="username" placeholder="Non d'Utilisateur">
+              </div>
+               <label for="email">Email</label>
+               <input type="email" class="form-control" name="mail" id="mail" aria-describedby="emailHelp" placeholder="Votre Email">
+           </div>
+           <button type="submit" class="btn btn-primary">Connecter</button>
+        </div>
+        
+        </div>
+      </form>      
+    </div>
+    <br>
+    <div id="msg">
+      <form action="" id="tchatM">
+          <div class="col-sm-6">
+        <div class="form-group">
+         <div class="input-group">
+         <input type="text" class="form-control" name="message" id="message">
+         <span class="input-group-btn"><button type="submit" class="btn btn-success">Envoyer</button></span>
+         </div>
+        </div>
+        </div>
+      </form>    
+    </div>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <!-- Optional JavaScript -->
+    <script src="socket.io/socket.io.js"></script>
+    <!--<script src="http://localhost:7000/mustache/mustache.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+    <script>
+    
+    jQuery(document).ready(function() {
+
+
+      var socket = io();
+
+$('#msg').hide();
+
+  $('#bienvenue').append('<div class="alert alert-success col-sm-4">Bienvenue</div>');
+  $('#bienvenue').fadeOut(10000);
+
+  var smst = $('#smst').html();
+  $('smst').remove();
+  var lastsms = false;
+
+  $('#tchatForm').submit(function(event){
+    event.preventDefault();
+   socket.emit('login', {
+      username : $('#username').val(),
+      mail     : $('#mail').val()
+
+    });
+
+  });
+
+
+ socket.on('logged',function(){
+    $('#formulaire').hide();
+    $('#msg').show();
+    $('#message').focus();
+
+  });
+
+ socket.on('noLogged',function(){
+    $('#noLogger').append('<div class="alert alert-danger col-sm-4">Champs vides!</div>');
+    $('#noLogger').fadeOut(5000);
+
+  });
+
+  socket.on('new',function(user){
+    $('#moi').append('<div id="' + user.id + '"><img src="' + user.avatar + '" > <br>' + user.username +'</div><br>')
+
+  });
+
+
+socket.on('connecterU',function(user){
+    $('#newu').append('<div class="alert alert-success col-sm-4">Vous êtes connecté(e) en tant que ' + user.username + '</divs');
+    $('#newu').fadeOut(5000);
+
+  });
+
+socket.on('newt',function(user){
+    $('#newu').append('<div class="alert alert-success col-sm-4">' + user.username + ' est connecté(e)s</divs');
+    $('#newu').fadeOut(5000);
+
+  });
+
+
+  $('#tchatM').submit(function(event){
+    event.preventDefault();
+  socket.emit('newmsg', {message: $('#message').val()});
+    $('#message').val('');
+    $('#message').focus();
+
+  });
+
+ socket.on('newmsg', function(message){
+    if(lastsms != message.user.id){
+      $('#sms').append('<br>');
+      lastsms =message.user.id;
+    }
+
+    $('#sms').append('<div class="message">' + Mustache.render(smst, message) + '</div>');
+    $('#sms').animate({scrollTop: $('#sms').prop('scrollHeight')}, 500);
+  });
+     
+ socket.on('deco', function(user){
+    $('#' + user.id).remove();
+  });
+
+  
+
+});
+
+    </script>
+  </style>
+</html>
